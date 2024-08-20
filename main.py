@@ -26,10 +26,54 @@ class Functions:
         pca = PCA(n_components=ncomp)
         pca_data = pca.fit_transform(data)
 
-    def get_dataloader(self, )
+    def train_dataloader(self, dataset):
+        if dataset == 'mnist':
+            train_loader = torch.utils.data.DataLoader(
+                datasets.MNIST('../mnist', download=True, train=True,
+                                transform=transforms.Compose([
+                                    torchvision.transforms.ToTensor(),
+                                    transforms.Lambda(torch.flatten),
+                                ])), 
+                                batch_size=10000, 
+                                shuffle=True)
+        elif dataset == 'fashion':
+            train_loader = torch.utils.data.DataLoader(
+                datasets.FashionMNIST('../fashion', download=True, train=True,
+                                transform=transforms.Compose([
+                                    torchvision.transforms.ToTensor(),
+                                    transforms.Lambda(torch.flatten),
+                                ])), 
+                                batch_size=10000, 
+                                shuffle=True)
+        else:
+            raise ValueError("'{}' is not a valid dataset name. Available datasets are: 'mnist' or 'fashion'".format(dataset))
+        
 
 
-class QG_CD_GAN(Functions):
-    def __init__(self):
-        pass
-    def 
+
+
+class QG_CD_GAN:
+    def __init__(self, image_size, batch_size, pca_dims, n_qubits, q_depth, n_generators):
+        self.F = Functions()
+        self.image_size = image_size
+        self.batch_size = batch_size
+        self.pca_dims = pca_dims
+        self.n_qubits = n_qubits
+        self.q_depth = q_depth
+        self.n_generators = n_generators
+
+    def train(self):
+            
+
+
+
+
+
+
+
+
+
+
+
+if __name_ == '__main__':
+    pass
